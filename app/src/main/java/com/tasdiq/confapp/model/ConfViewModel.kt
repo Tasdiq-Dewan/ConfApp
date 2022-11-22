@@ -14,6 +14,7 @@ class ConfViewModel : ViewModel() {
     var allTalks : List<Talk> = listOf()
     var allLocations : List<Location> = listOf()
     var allSpeakers : List<Speaker> = listOf()
+    var favourites : MutableList<Talk> = mutableListOf()
 
     fun loadConfDataFromFile(context: FragmentActivity){
         val locationsString = stringFromAssetFile("locations.json", context)
@@ -30,6 +31,10 @@ class ConfViewModel : ViewModel() {
             it.readText()
         }
         return answer
+    }
+
+    fun getFavouriteTalks() : MutableList<Talk> {
+        return mutableListOf(allTalks[0], allTalks[1])
     }
 
     fun speakerNameFromSpeakerId( speakerId: String): String {

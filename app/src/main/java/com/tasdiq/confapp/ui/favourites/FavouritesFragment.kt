@@ -1,4 +1,4 @@
-package com.tasdiq.confapp.ui.talks
+package com.tasdiq.confapp.ui.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tasdiq.confapp.databinding.FragmentTalksBinding
 import com.tasdiq.confapp.model.ConfViewModel
+import com.tasdiq.confapp.ui.talks.TalkAdapter
+import com.tasdiq.confapp.ui.talks.TalksFragmentDirections
 
-class TalksFragment : Fragment(), TalkAdapter.TalkClickListener{
-
+class FavouritesFragment : Fragment(), TalkAdapter.TalkClickListener {
     private var _binding: FragmentTalksBinding? = null
 
     // This property is only valid between onCreateView and
@@ -42,14 +43,14 @@ class TalksFragment : Fragment(), TalkAdapter.TalkClickListener{
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.listOfTalks
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TalkAdapter(view.context, this, viewModel, false)
+        recyclerView.adapter = TalkAdapter(view.context, this, viewModel, true)
     }
 
     override fun listItemClicked(choice: Int) {
-        //Show the next set of categories/questions down
-        val action = TalksFragmentDirections.actionNavTalksToTalkDetail(choice)
-        // Navigate using that action
-        this.findNavController().navigate(action)
+//        //Show the next set of categories/questions down
+//        val action = TalksFragmentDirections.actionNavTalksToTalkDetail(choice)
+//        // Navigate using that action
+//        this.findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

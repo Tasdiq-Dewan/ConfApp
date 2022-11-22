@@ -11,8 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tasdiq.confapp.model.ConfViewModel
 import com.tasdiq.confapp.R
+import com.tasdiq.confapp.model.Talk
 
-class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.TalkClickListener, val viewModel: ConfViewModel)  : RecyclerView.Adapter<TalkAdapter.TalkViewHolder>() {
+class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.TalkClickListener, val viewModel: ConfViewModel, val favourites : Boolean)  : RecyclerView.Adapter<TalkAdapter.TalkViewHolder>() {
 
     class TalkViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         val startTime : TextView = view.findViewById(R.id.startTime)
@@ -27,6 +28,9 @@ class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.
     }
 
     override fun getItemCount(): Int {
+        if(favourites){
+            return viewModel.favourites.size
+        }
         return viewModel.allTalks.size
     }
 
@@ -37,15 +41,21 @@ class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.
     }
 
     override fun onBindViewHolder(holder : TalkAdapter.TalkViewHolder, index: Int) {
-        holder.startTime.text = viewModel.allTalks[index].timeStart
-        holder.endTime.text = viewModel.allTalks[index].timeEnd
-        val date = viewModel.allTalks[index].sessionDate
+        val talk : Talk
+        if(favourites){
+            talk = viewModel.favourites[index]
+        }
+        else{
+            talk = viewModel.allTalks[index]
+        }
+        holder.startTime.text = talk.timeStart
+        holder.endTime.text = talk.timeEnd
+        val date = talk.sessionDate
         holder.talkDate.text = viewModel.dayName(date)
-        holder.talkName.text = viewModel.allTalks[index].title
-        val speakerId = viewModel.allTalks[index].speakerId
+        holder.talkName.text = talk.title
+        val speakerId = talk.speakerId
         holder.talkSpeaker.text = viewModel.speakerNameFromSpeakerId(speakerId)
-        val myTalk = viewModel.allTalks[index]
-        if (myTalk.sessionType == "talk" || myTalk.sessionType == "workshop" ) {
+        if (talk.sessionType == "talk" || talk.sessionType == "workshop" ) {
             holder.itemView.setOnClickListener({ clickListener.listItemClicked(index) })
         } else {
             holder.view.setBackgroundColor(Color.parseColor("#00cc00"))
