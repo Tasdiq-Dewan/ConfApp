@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_talks">
+
+    <fragment
+        android:id="@+id/nav_talks"
+        android:name="com.tasdiq.confapp.ui.talks.TalksFragment"
+        android:label="Talks"
+        tools:layout="@layout/fragment_talks" >
+        <action
+            android:id="@+id/action_nav_talks_to_talkDetail"
+            app:destination="@id/talkDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_speakers"
+        android:name="com.tasdiq.confapp.ui.speakers.SpeakersFragment"
+        android:label="Speakers"
+        tools:layout="@layout/fragment_speakers" >
+        <action
+            android:id="@+id/action_nav_speakers_to_speakerDetail"
+            app:destination="@id/speakerDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_locations"
+        android:name="com.tasdiq.confapp.ui.locations.LocationsFragment"
+        android:label="Locations"
+        tools:layout="@layout/fragment_locations" >
+        <action
+            android:id="@+id/action_nav_locations_to_locationMap"
+            app:destination="@id/locationMap" />
+    </fragment>
+    <fragment
+        android:id="@+id/speakerDetail"
+        android:name="com.cjp.speaker2.ui.main.SpeakerDetail"
+        android:label="SpeakerDetail" >
+        <argument
+            android:name="speakerListIndex"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/talkDetail"
+        android:name="com.tasdiq.confapp.ui.talks.TalkDetail"
+        android:label="TalkDetail" >
+        <argument
+            android:name="talkListIndex"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_talkDetail_to_speakerDetail"
+            app:destination="@id/speakerDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationMap"
+        android:name="com.tasdiq.confapp.ui.locations.LocationMap"
+        android:label="LocationMap" />
+</navigation>
