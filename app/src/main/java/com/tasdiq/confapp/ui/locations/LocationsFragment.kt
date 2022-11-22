@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cjp.confapp.model.ConfViewModel
+import com.tasdiq.confapp.model.ConfViewModel
 import com.cjp.speaker2.ui.main.SpeakerAdapter
 import com.tasdiq.confapp.databinding.FragmentLocationsBinding
 import com.tasdiq.confapp.ui.speakers.SpeakersFragment

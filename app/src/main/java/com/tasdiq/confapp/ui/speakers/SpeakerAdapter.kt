@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.cjp.confapp.model.ConfViewModel
+import com.tasdiq.confapp.model.ConfViewModel
 import com.tasdiq.confapp.R
 
 class SpeakerAdapter(private val context: Context, val clickListener: SpeakerClickListener, val viewModel: ConfViewModel) : RecyclerView.Adapter<SpeakerAdapter.SpeakerViewHolder>() {

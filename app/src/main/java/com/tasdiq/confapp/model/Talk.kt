@@ -1,5 +1,6 @@
-package com.cjp.confapp.model
+package com.tasdiq.confapp.model
 
+@kotlinx.serialization.Serializable
 class Talk (
     var id: String,
     var title: String,

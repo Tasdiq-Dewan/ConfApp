@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.cjp.confapp.model.ConfViewModel
-import com.cjp.speaker2.ui.main.SpeakerDetail
-import com.tasdiq.confapp.databinding.FragmentSpeakerDetailBinding
+import com.tasdiq.confapp.model.ConfViewModel
 import com.tasdiq.confapp.databinding.FragmentTalkDetailBinding
-import com.tasdiq.confapp.ui.speakers.SpeakersFragmentDirections
+
 
 class TalkDetail : Fragment() {
 

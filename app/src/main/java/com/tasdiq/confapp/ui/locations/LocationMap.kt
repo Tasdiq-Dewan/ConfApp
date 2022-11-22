@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.cjp.confapp.model.ConfViewModel
 import com.tasdiq.confapp.databinding.FragmentLocationMapBinding
-import com.tasdiq.confapp.databinding.FragmentSpeakerDetailBinding
+
 
 class LocationMap : Fragment() {
 

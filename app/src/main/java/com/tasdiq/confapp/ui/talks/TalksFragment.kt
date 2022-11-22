@@ -9,10 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cjp.confapp.model.ConfViewModel
-import com.cjp.speaker2.ui.main.SpeakerAdapter
 import com.tasdiq.confapp.databinding.FragmentTalksBinding
-import com.tasdiq.confapp.ui.speakers.SpeakersFragmentDirections
+import com.tasdiq.confapp.model.ConfViewModel
 
 class TalksFragment : Fragment(), TalkAdapter.TalkClickListener{
 
@@ -27,6 +25,7 @@ class TalksFragment : Fragment(), TalkAdapter.TalkClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ConfViewModel::class.java)
+        viewModel.loadConfDataFromFile(requireActivity())
     }
 
     override fun onCreateView(

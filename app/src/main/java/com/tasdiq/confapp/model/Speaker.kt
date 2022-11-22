@@ -1,5 +1,6 @@
-package com.cjp.confapp.model
+package com.tasdiq.confapp.model
 
+@kotlinx.serialization.Serializable
 class Speaker(
     val id: String,
     val photo: String,

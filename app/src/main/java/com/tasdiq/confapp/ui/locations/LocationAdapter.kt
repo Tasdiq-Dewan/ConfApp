@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.cjp.confapp.model.ConfViewModel
-import com.cjp.speaker2.ui.main.SpeakerAdapter
+import com.tasdiq.confapp.model.ConfViewModel
 import com.tasdiq.confapp.R
 
 class LocationAdapter (private val context: Context, val clickListener: LocationClickListener, val viewModel: ConfViewModel) : RecyclerView.Adapter<LocationAdapter.LocationViewHolder>() {
