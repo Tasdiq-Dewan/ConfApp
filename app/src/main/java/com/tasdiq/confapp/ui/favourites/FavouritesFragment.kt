@@ -26,7 +26,6 @@ class FavouritesFragment : Fragment(), TalkAdapter.TalkClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ConfViewModel::class.java)
-        viewModel.loadConfDataFromFile(requireActivity())
     }
 
     override fun onCreateView(
@@ -47,10 +46,10 @@ class FavouritesFragment : Fragment(), TalkAdapter.TalkClickListener {
     }
 
     override fun listItemClicked(choice: Int) {
-//        //Show the next set of categories/questions down
-//        val action = TalksFragmentDirections.actionNavTalksToTalkDetail(choice)
-//        // Navigate using that action
-//        this.findNavController().navigate(action)
+        //Show the next set of categories/questions down
+        val action = FavouritesFragmentDirections.actionNavFavouritesToTalkDetail(choice)
+        // Navigate using that action
+        this.findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

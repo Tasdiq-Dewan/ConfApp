@@ -42,6 +42,10 @@ class TalkDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val talk = viewModel.allTalks[talkListIndex]
+        val fab = binding.fab
+        if(viewModel.isFavourited(talk.id)){
+            changeFabIcon("android:drawable/btn_star_big_on")
+        }
         binding.talkTitle.text = talk.title
         binding.speakerButton.text = viewModel.speakerNameFromSpeakerId(talk.speakerId)
         binding.talkDescription.text = talk.content
@@ -49,6 +53,24 @@ class TalkDetail : Fragment() {
         binding.locationButton.text = "Location: $location"
         val speakerIndex = viewModel.speakerIndexFromSpeakerId(talk.speakerId)
         binding.speakerButton.setOnClickListener{clickListener(speakerIndex)}
+
+        fab.setOnClickListener{
+            if(viewModel.isFavourited(talk.id)){
+                viewModel.favourites.remove(talk.id)
+                viewModel.saveFavourites(requireActivity())
+                changeFabIcon("android:drawable/ic_menu_add")
+            }
+            else{
+                viewModel.favourites.add(talk.id)
+                viewModel.saveFavourites(requireActivity())
+                changeFabIcon("android:drawable/btn_star_big_on")
+            }
+        }
+    }
+
+    private fun changeFabIcon(newIcon : String){
+        val resourceId : Int = requireActivity().resources.getIdentifier(newIcon, "drawable", "android")
+        binding.fab.setImageResource(resourceId)
     }
 
     private fun clickListener(choice: Int) {

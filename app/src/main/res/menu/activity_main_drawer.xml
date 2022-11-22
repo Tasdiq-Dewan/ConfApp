@@ -16,5 +16,9 @@
             android:id="@+id/nav_locations"
             android:icon="@drawable/locations_icon"
             android:title="Locations" />
+        <item
+            android:id="@+id/nav_favourites"
+            android:icon="@android:drawable/star_big_on"
+            android:title="Favourites" />
     </group>
 </menu>

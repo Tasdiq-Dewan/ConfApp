@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/speakerDetail"
         android:name="com.cjp.speaker2.ui.main.SpeakerDetail"
-        android:label="SpeakerDetail" >
+        android:label="Speaker Details">
         <argument
             android:name="speakerListIndex"
             app:argType="integer" />
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/talkDetail"
         android:name="com.tasdiq.confapp.ui.talks.TalkDetail"
-        android:label="TalkDetail" >
+        android:label=" Talk Details">
         <argument
             android:name="talkListIndex"
             app:argType="integer" />
@@ -56,9 +56,13 @@
     <fragment
         android:id="@+id/locationMap"
         android:name="com.tasdiq.confapp.ui.locations.LocationMap"
-        android:label="LocationMap" />
+        android:label="Location Map" />
     <fragment
         android:id="@+id/nav_favourites"
         android:name="com.tasdiq.confapp.ui.favourites.FavouritesFragment"
-        android:label="FavouritesFragment" />
+        android:label="My Favourite Talks">
+        <action
+            android:id="@+id/action_nav_favourites_to_talkDetail"
+            app:destination="@id/talkDetail" />
+    </fragment>
 </navigation>

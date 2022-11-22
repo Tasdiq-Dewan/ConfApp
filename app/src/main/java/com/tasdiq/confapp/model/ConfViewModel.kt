@@ -3,7 +3,9 @@ package com.tasdiq.confapp.model
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.io.File
 
 class ConfViewModel : ViewModel() {
 
@@ -14,7 +16,7 @@ class ConfViewModel : ViewModel() {
     var allTalks : List<Talk> = listOf()
     var allLocations : List<Location> = listOf()
     var allSpeakers : List<Speaker> = listOf()
-    var favourites : MutableList<Talk> = mutableListOf()
+    var favourites : MutableList<String> = mutableListOf()
 
     fun loadConfDataFromFile(context: FragmentActivity){
         val locationsString = stringFromAssetFile("locations.json", context)
@@ -23,6 +25,7 @@ class ConfViewModel : ViewModel() {
         allTalks = Json.decodeFromString<List<Talk>>(talksString)
         val speakerString = stringFromAssetFile("speakers.json", context)
         allSpeakers = Json.decodeFromString<List<Speaker>>(speakerString)
+        loadFavourites(context)
     }
 
     fun stringFromAssetFile(assetName: String, context: FragmentActivity): String{
@@ -33,8 +36,34 @@ class ConfViewModel : ViewModel() {
         return answer
     }
 
-    fun getFavouriteTalks() : MutableList<Talk> {
-        return mutableListOf(allTalks[0], allTalks[1])
+    fun saveFavourites(context : FragmentActivity){
+        val jsonString = encodeFavourites(favourites)
+        val textFile = File(context.filesDir, "favourites.json")
+        textFile.writeText(jsonString)
+    }
+
+    private fun encodeFavourites(favourites: MutableList<String>): String {
+        return Json.encodeToString(favourites)
+    }
+
+    fun loadFavourites(context : FragmentActivity){
+        val textFile = File(context.filesDir, "favourites.json")
+        if(textFile.isFile){
+            val jsonString = textFile.readText()
+            favourites = Json.decodeFromString<MutableList<String>>(jsonString)
+        }
+    }
+
+    fun isFavourited(talkId : String) : Boolean {
+        val result = favourites.filter{talkId == it}
+        if(result.isEmpty()){
+            return false
+        }
+        return true
+    }
+
+    fun getFavouriteTalks() : MutableList<String> {
+        return favourites
     }
 
     fun speakerNameFromSpeakerId( speakerId: String): String {
@@ -62,6 +91,15 @@ class ConfViewModel : ViewModel() {
            else result = result + 1
        }
        return 0
+    }
+
+    fun talkIndexFromTalkId(talkId : String) : Int {
+        var result = 0
+        for (talk in allTalks) {
+            if (talk.id == talkId) { return result }
+            else result = result + 1
+        }
+        return 0
     }
 
 

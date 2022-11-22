@@ -42,8 +42,10 @@ class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.
 
     override fun onBindViewHolder(holder : TalkAdapter.TalkViewHolder, index: Int) {
         val talk : Talk
+
         if(favourites){
-            talk = viewModel.favourites[index]
+            val talkindex = viewModel.talkIndexFromTalkId(viewModel.favourites[index])
+           talk = viewModel.allTalks[talkindex]
         }
         else{
             talk = viewModel.allTalks[index]
@@ -56,7 +58,8 @@ class TalkAdapter (private val context: Context, val clickListener: TalkAdapter.
         val speakerId = talk.speakerId
         holder.talkSpeaker.text = viewModel.speakerNameFromSpeakerId(speakerId)
         if (talk.sessionType == "talk" || talk.sessionType == "workshop" ) {
-            holder.itemView.setOnClickListener({ clickListener.listItemClicked(index) })
+            val i = viewModel.talkIndexFromTalkId(talk.id)
+            holder.itemView.setOnClickListener{ clickListener.listItemClicked(i) }
         } else {
             holder.view.setBackgroundColor(Color.parseColor("#00cc00"))
         }
